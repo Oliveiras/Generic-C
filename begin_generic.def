@@ -1,0 +1,101 @@
+
+#ifdef type
+    #ifndef type_name
+        #define type_name type
+    #endif
+    #ifndef type_ctor
+        #define type_ctor()
+    #endif
+    #ifndef type_clone
+        #define type_clone(other) (other)
+    #endif
+    #ifndef type_copy
+        #define type_copy(pself, other) (*(pself) = (other))
+    #endif
+    #ifndef type_move
+        #define type_move(pself, other) type_copy(pself, other)
+    #endif
+    #ifndef type_dtor
+        #define type_dtor(pself) 
+    #endif
+#endif
+
+#ifdef type1
+    #ifndef type1_name
+        #define type1_name type1
+    #endif
+    #ifndef type1_ctor
+        #define type1_ctor()
+    #endif
+    #ifndef type1_clone
+        #define type1_clone(other) (other)
+    #endif
+    #ifndef type1_copy
+        #define type1_copy(pself, other) (*(pself) = (other))
+    #endif
+    #ifndef type1_move
+        #define type1_move(pself, other) type1_copy(pself, other)
+    #endif
+    #ifndef type1_dtor
+        #define type1_dtor(pself) 
+    #endif
+#endif
+
+#ifdef type2
+    #ifndef type2_name
+        #define type2_name type2
+    #endif
+    #ifndef type2_ctor
+        #define type2_ctor()
+    #endif
+    #ifndef type2_clone
+        #define type2_clone(other) (other)
+    #endif
+    #ifndef type2_copy
+        #define type2_copy(pself, other) (*(pself) = (other))
+    #endif
+    #ifndef type2_move
+        #define type2_move(pself, other) type2_copy(pself, other)
+    #endif
+    #ifndef type2_dtor
+        #define type2_dtor(pself) 
+    #endif
+#endif
+
+#ifdef type3
+    #ifndef type3_name
+        #define type3_name type3
+    #endif
+    #ifndef type3_ctor
+        #define type3_ctor()
+    #endif
+    #ifndef type3_clone
+        #define type3_clone(other) (other)
+    #endif
+    #ifndef type3_copy
+        #define type3_copy(pself, other) (*(pself) = (other))
+    #endif
+    #ifndef type3_move
+        #define type3_move(pself, other) type3_copy(pself, other)
+    #endif
+    #ifndef type3_dtor
+        #define type3_dtor(pself) 
+    #endif
+#endif
+
+#ifndef GENC
+    #define GENC
+    #define GENC_SUBCONCAT(_1, _2, _3, _4, ...) _1##_2##_3##_4
+    #define GENC_CONCAT(...) GENC_SUBCONCAT(__VA_ARGS__)
+    #define GENC_SPACES()   ,   ,   ,   ,   ,   ,   , GENC_ERROR_TOO_MANY_ARGUMENTS
+    
+    #ifdef prefix
+        #define GENC_PREFIX() prefix
+    #else
+        #define GENC_PREFIX() GENC_CONCAT(module_name, _, type_name, GENC_SPACES())
+    #endif
+    #define function(...) GENC_CONCAT(GENC_PREFIX(), _, __VA_ARGS__, GENC_SPACES())
+    #define structure(...) GENC_CONCAT(struct GENC_PREFIX(), _, __VA_ARGS__, GENC_SPACES())
+    #define main_function GENC_CONCAT(GENC_PREFIX(), GENC_SPACES())
+    #define main_structure GENC_CONCAT(struct GENC_PREFIX(), GENC_SPACES())
+#endif

@@ -1,0 +1,48 @@
+
+#ifdef GENC
+    #undef GENC
+    #undef GENC_SUBCONCAT
+    #undef GENC_CONCAT
+    #undef GENC_SPACES
+    #undef function
+    #undef structure
+    #undef main_function
+    #undef main_structure
+    #undef module_name
+#endif
+
+#ifdef type
+    #undef type
+    #undef type_name
+    #undef type_ctor
+    #undef type_copy
+    #undef type_assign
+    #undef type_dtor
+#endif
+
+#ifdef type1
+    #undef type1
+    #undef type1_name
+    #undef type1_ctor
+    #undef type1_copy
+    #undef type1_assign
+    #undef type1_dtor
+#endif
+
+#ifdef type2
+    #undef type2
+    #undef type2_name
+    #undef type2_ctor
+    #undef type2_copy
+    #undef type2_assign
+    #undef type2_dtor
+#endif
+
+#ifdef type3
+    #undef type3
+    #undef type3_name
+    #undef type3_ctor
+    #undef type3_copy
+    #undef type3_assign
+    #undef type3_dtor
+#endif

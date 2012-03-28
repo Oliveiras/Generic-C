@@ -1,0 +1,44 @@
+#ifdef GENC
+    #error Generic C doesn't support recursive inclusion of templates yet
+#else
+    #define GENC
+    #define GENC_SUBCONCAT( %1 _%i, %M ...) _1 %2 ## _%i %M
+    #define GENC_CONCAT(...) GENC_SUBCONCAT(__VA_ARGS__)
+    #define GENC_SPACES() %1 , %M
+#endif /* GENC */
+
+%Z
+#ifdef type%i
+    #ifndef type%i_name
+        #define type%i_name type%i
+    #endif
+    #ifndef type%i_clone
+        #define type%i_clone(other) (other)
+    #endif
+    #ifndef type%i_copy
+        #define type%i_copy(pself, other) (*(pself) = (other))
+    #endif
+    #ifndef type%i_move
+        #define type%i_move(pself, other) type%i_copy(pself, other)
+    #endif
+    #ifndef type%i_dtor
+        #define type%i_dtor(pself) 
+    #endif
+#endif /* type%i */
+%(M/2)
+
+#ifdef prefix
+    #define GENC_PREFIX() prefix
+#endif
+#else
+    %(M/2)
+    #if defined type%i && !defined GENC_PREFIX
+        #define GENC_PREFIX() GENC_CONCAT(module_name, %%Z _ , type%j_name, %%i GENC_SPACES())
+    #endif
+    %Z
+#endif
+
+#define function(...) GENC_CONCAT(GENC_PREFIX(), _, __VA_ARGS__, GENC_SPACES())
+#define structure(...) GENC_CONCAT(struct GENC_PREFIX(), _, __VA_ARGS__, GENC_SPACES())
+#define main_function GENC_CONCAT(GENC_PREFIX(), GENC_SPACES())
+#define main_structure GENC_CONCAT(struct GENC_PREFIX(), GENC_SPACES())
